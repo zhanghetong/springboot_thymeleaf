@@ -22,13 +22,9 @@ public class DashboardController {
     @Resource
     private UserMapper userMapper;
 
-    @GetMapping("layout")
-    public String layout(){
-        return "layout";
-    }
     @GetMapping("list")
-    public String toListPage(Model model,
-                             @RequestParam(value = "filter",required = false) String filter){
+    public String toListPage(@RequestParam(required = false) String filter,
+                             Model model){
         List<User> userList = userMapper.getUserAll(filter);
         model.addAttribute("userList", userList);
         return "list";
@@ -40,7 +36,7 @@ public class DashboardController {
     }
 
     @GetMapping("userPage/{id}")
-    public String toUserEditPage(@PathVariable("id") int id,
+    public String toUserEditPage(@PathVariable int id,
                                  Model model){
         User user = userMapper.getUser(id);
         model.addAttribute("user",user);
@@ -61,7 +57,7 @@ public class DashboardController {
 
 
     @PostMapping("/user/delete/{id}")
-    public String delUser(@PathVariable("id") int id) {
+    public String delUser(@PathVariable int id) {
         userMapper.deleteUser(id);
         return "redirect:/list";
     }
