@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://getbootstrap.net/example/dashboard/# -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="~{layout.html}">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Dashboard Template · Bootstrap</title>
+</head>
+<body>
+  <main layout:fragment="content" role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <form th:action="${user!=null}?@{/user/update}:@{/user/add}" method="post">
+          <div class="form-group">
+            <label for="inputId">Id</label>
+            <input name="id" readonly th:disabled="${user!=null}?false:true" type="text" class="form-control" id="inputId" th:value="${user!=null}?${user.id}">
+          </div>
+          <div class="form-group">
+            <label for="inputName">Name</label>
+            <input name="name" type="text" class="form-control" id="inputName" th:value="${user!=null}?${user.name}">
+          </div>
+          <div class="form-group">
+            <label for="inputAge">Age</label>
+            <input name="age" type="text" class="form-control" id="inputAge" th:value="${user!=null}?${user.age}">
+          </div>
+          <button type="submit" class="btn btn-primary" th:text="${user!=null}?'修改':'添加'">Submit</button>
+        </form>
+      </main>
+</body>
+</html>
